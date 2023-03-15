@@ -1,0 +1,43 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title></title>
+        <link href="https://unpkg.com/grapesjs/dist/css/grapes.min.css" rel="stylesheet"/>
+        <script src="https://unpkg.com/grapesjs"></script>
+        <script type="text/javascript" src='index.js'></script>
+        <style>
+            .import{
+                position:absolute;
+                top:15px;
+                left:200px;
+                width:90px;
+                z-index:4;
+            }
+        </style>
+    </head>
+    <body>
+        <input type="file" class="import" id="import" accept='.html,.html'/>
+        <div id="gjs"></div>
+
+    </body>
+</html>
+<script type="text/javascript">
+    var editor = grapesjs.init({
+        container : '#gjs'
+    });
+
+    document.getElementById('import').onchange = function (e) {
+        var file = e.target.files[0];
+        var reader = new FileReader();
+        var html;
+        console.log('here>>>>')
+        reader.onloadend = function () {
+            html = reader.result;
+            console.log(html);
+            editor.setComponents(html);
+        };
+        reader.readAsText(file, "UTF-8");
+    };
+</script>
